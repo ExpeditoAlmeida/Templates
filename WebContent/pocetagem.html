@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+	    <title>harpia</title>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+		<script
+ 			src="https://code.jquery.com/jquery-2.2.4.min.js"
+  			integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+        
+	</head>
+
+<body>
+ 
+  <h4 id="totTec"></h4>
+
+
+    <div class="progress">
+  	   <div class="progress-bar" id="totalCC" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" > 0%</div>
+	</div>
+
+	<div class="progress" >
+			<div class="progress-bar" id="totalCP" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 0em;"> 0% </div>
+  	</div>
+			
+  	<div class="progress">
+			<div class="progress-bar" id="totalOS" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 0em;"> 0% </div>
+  	</div>
+			
+    <div class="progress">
+			<div class="progress-bar" id="totalEN" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 0em;"> 0% </div>
+  	</div>
+			
+
+
+	<script> 
+		var result = 'http://localhost:8080/harpia/checkpoint/getResumoGeralJson';
+	   
+		$.getJSON(result, function(data){				
+		     $("#totTec").text("Total de Técnicos: "+data.totalTEC);
+		     console.log(data.totalCC);
+
+		     var totalCC = (data.totalCC * 100) / data.totalTEC;
+		     $("#totalCC").css ("min-width",totalCC+"em");
+		     $("#totalCC").html(totalCC.toFixed(1).replace(".",",")+"  %  totalCC");
+
+		     var totalCP = (data.totalCP * 100) / data.totalTEC;
+		     $("#totalCP").css("min-width",totalCP+"em");
+		     $("#totalCP").html(totalCP.toFixed(1).replace(".",",")+"  %  totalCP");
+
+		     var totalOS = (data.totalOS *100) / data.totalTEC;
+		    $("#totalOS").css("min-width",totalOS+"em");
+		    $("#totalOS").html(totalOS.toFixed(1).replace(".",",")+" % totalOS");
+
+		    var totalEN = (data.totalEN * 100) / data.totalTEC;
+		    $("#totalEN").css("min-width",totalEN +"em");
+		     $("#totalEN").html( totalEN.toFixed(1).replace(".",",")+"  % totalEN");
+
+		 });
+			
+	</script>
+  </body>
+</html>
